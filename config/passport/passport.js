@@ -1,116 +1,49 @@
-// PASSPORT STRATEGY CONFIG FILE
-var bCrypt = require('bcrypt-nodejs'); // import bcrypt module
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
 
-module.exports = function (passport, user) {
-    var User = user;
-    var LocalStrategy = require('passport-local').Strategy;
+var db = require("../../models");
 
-    // Define Custom Strategy
-    passport.use('local-signup', new LocalStrategy(
-        {
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
-        },
-        // CALLBACK FUNCTION
-        function (req, email, password, done) {
-
-            // generates hash password
-            var generateHash = function (password) {
-                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-            };
-
-            // Check if user exists using Sequelize
-            User.findOne({
-                where: {
-                    email: email
-                }
-            }).then(function (user) {
-                // check if user already exists, else create a new one
-                if (user) {
-                    return done(null, false, {
-                        message: 'That email is already taken. Please use a different one or log in.'
-                    });
-                } else {
-                    var userPassword = generateHash(password);
-                    var data =
-                    {
-                        email: email,
-                        password: userPassword,
-                        firstname: req.body.firstname,
-                        lastname: req.body.lastname
-                    };
-
-                    User.create(data).then(function (newUser, created) {
-                        if (newUser) {
-                            return done(null, newUser);
-                        } else {
-                            return done(null, false);
-                        }
-                    });
-                }
-            });
-        }
-    ));
-
-    // SERIALIZE USER into Session OR IT BREAKS!
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    });
-
-    // deserialize user 
-    passport.deserializeUser(function (id, done) {
-        User.findById(id).then(function (user) {
-            if (user) {
-                done(null, user.get());
-            } else {
-                done(user.errors, null);
-            }
+// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
+passport.use(new LocalStrategy(
+  // Our user will sign in using an email, rather than a "username"
+  {
+    usernameField: "email"
+  },
+  function(email, password, done) {
+    // When a user tries to sign in this code runs
+    db.User.findOne({
+      where: {
+        email: email
+      }
+    }).then(function(dbUser) {
+      // If there's no user with the given email
+      if (!dbUser) {
+        return done(null, false, {
+          message: "Incorrect email."
         });
+      }
+      // If there is a user with the given email, but the password the user gives us is incorrect
+      else if (!dbUser.validPassword(password)) {
+        return done(null, false, {
+          message: "Incorrect password."
+        });
+      }
+      // If none of the above, return the user
+      return done(null, dbUser);
     });
+  }
+));
 
-    //LOCAL SIGNIN STRATEGY
-    passport.use('local-signin', new LocalStrategy(
-        {
-            // by default, local strategy uses username and password, we will override with email
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true // allows us to pass back the entire request to the callback
-        },
+// In order to help keep authentication state across HTTP requests,
+// Sequelize needs to serialize and deserialize the user
+// Just consider this part boilerplate needed to make it all work
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
 
-        function (req, email, password, done) {
-            var User = user;
-            var isValidPassword = function (userpass, password) {
-                return bCrypt.compareSync(password, userpass);
-            }
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
-            User.findOne({
-                where: {
-                    email: email
-                }
-            }).then(function (user) {
-                if (!user) {
-                    return done(null, false, {
-                        message: 'Email does not exist'
-                    });
-                }
-                if (!isValidPassword(user.password, password)) {
-                    return done(null, false, {
-                        message: 'Incorrect password.'
-                    });
-                }
-
-                var userinfo = user.get();
-                return done(null, userinfo);
-
-            }).catch(function (err) {
-                console.log("Error:", err);
-                return done(null, false, {
-                    message: 'Something went wrong with your Signin'
-                });
-            });
-        }
-    ));
-
-    // END MODULE EXPORT
-}
+// Exporting our configured passport
+module.exports = passport;

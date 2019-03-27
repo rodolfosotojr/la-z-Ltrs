@@ -1,4 +1,6 @@
 // USER with Shipping Address
+var bcrypt = require("bcrypt-nodejs");
+
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define('User', {
         // ID IS ALREADY ADDED IN SEQUELIZE
@@ -18,10 +20,8 @@ module.exports = function (sequelize, DataTypes) {
             notEmpty: true
         },
         username: {
-            type: DataTypes.TEXT
-        },
-        about: {
-            type: DataTypes.TEXT
+            type: DataTypes.TEXT,
+            // allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
@@ -63,6 +63,17 @@ module.exports = function (sequelize, DataTypes) {
             // timestamps: false,
             freezeTableName: true,
         });
+
+    // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+    User.prototype.validPassword = function (password) {
+        return bcrypt.compareSync(password, this.password);
+    };
+
+    // Hooks are automatic methods that run during various phases of the User Model lifecycle
+    // In this case, before a User is created, we will automatically hash their password
+    User.hook("beforeCreate", function (user) {
+        user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+    });
 
     User.associate = function (models) {
         // Associating Author with Posts

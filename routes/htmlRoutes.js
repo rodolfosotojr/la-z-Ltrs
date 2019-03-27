@@ -1,20 +1,40 @@
 var db = require("../models");
 var path = require("path");
+var express = require("express");
+
+// **PASSPORT** middleware module
+var isAuth = require("../config/passport/isAuth");
 
 module.exports = function (app) {
 
+  // CSS and Image paths
+  app.use("/public", express.static(path.join(__dirname, "../public/")));
+
   // Basic routes to the log in page
   app.get("/", function (req, res) {
+    // **PASSPORT**
+    if (req.user) {
+      res.redirect("/home");  // if already logged-in go to home page
+    }
+    // **PASSPORT** if NOT logged in show the login page
     res.sendFile(path.join(__dirname, "../public/html/login.html"));
   });
 
+  // Registration Page
+  app.get("/register", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/registration.html"));
+  });
+
   //Route to the home page
-  app.get("/home", function (req, res) {
+  // **PASSPORT** - ADDED 'isAuth' middleware to route parameter below
+  // if user not logged in, will be redirected as shown in 'config/passport/isAuth.js' file
+  app.get("/home", isAuth, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/Home.html"));
   });
 
   //Route to the input page
-  app.get("/input", function (req, res) {
+  // **PASSPORT** - ADDED 'isAuth' middleware to route parameter below
+  app.get("/input", isAuth, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/newLetter.html"));
   });
 
@@ -24,9 +44,7 @@ module.exports = function (app) {
   });
 
   // Displays all of the past orders
-  app.get("/api/orderhistory", function (req, res) {
-    return res.json(pastorders);
-  });
+  // MOVED TO apiRoutes
 
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
