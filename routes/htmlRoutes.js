@@ -9,17 +9,17 @@ module.exports = function (app) {
 
   //Route to the home page
   app.get("/home", function (req, res) {
-    res.sendFile(path.join(__dirname, "homepage.html"));
+    res.sendFile(path.join(__dirname, "Home.html"));
   });
 
   //Route to the input page
   app.get("/input", function (req, res) {
-    res.sendFile(path.join(__dirname, "input.html"));
+    res.sendFile(path.join(__dirname, "newLetter.html"));
   });
 
   //Route to the how to guide
   app.get("/add", function (req, res) {
-    res.sendFile(path.join(__dirname, "howto.html"));
+    res.sendFile(path.join(__dirname, "howTo.html"));
   });
 
   // Displays all of the past orders
