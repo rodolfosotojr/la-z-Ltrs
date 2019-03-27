@@ -39,7 +39,7 @@ module.exports = function (app) {
   });
 
   //Route to the how to guide
-  app.get("/add", function (req, res) {
+  app.get("/howTo", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/howTo.html"));
   });
 
