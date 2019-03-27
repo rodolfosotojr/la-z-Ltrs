@@ -1,5 +1,6 @@
 var db = require("../models");
 var passport = require("../config/passport/passport");
+var request = require('request'); // for AJAX calls
 
 
 module.exports = function (app) {
@@ -31,11 +32,30 @@ module.exports = function (app) {
   });
 
   // Logout using .logout() method then redirect to login page.
-  app.get("/api/logout", function(req, res) {
+  app.get("/api/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
 
+  // list past orders
+  app.post("/api/orders", function (error, response, body) {
+    request.post({
+      url: 'https://api.handwrytten.com/v1/orders/list',
+      form: {
+        uid: process.env.HANDWRYTTEN_UID
+      }
+    }, function (err, res, body) {
+      if (err) {
+        return console.error('Past orders call failed:', err);
+      }
+      var info = JSON.parse(body)
+      console.log('statusCode:', res && res.statusCode); // Print the response status code if a response was received
+      console.log('body:', body); // Print the HTML for the Google homepage.
+      console.log("httpResponse: ", res);
+      console.log("body: ", body);
+      response.json(info);
+    })
+  })
 
   // Create a new example
   app.post("/api/examples", function (req, res) {
