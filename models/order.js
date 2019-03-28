@@ -1,11 +1,51 @@
 // Orders for registered user
 module.exports = function (sequelize, DataTypes) {
     var Order = sequelize.define("Order", {
-      order: {
-        type: DataTypes.INTEGER,
+      sender_name: {
+        type: DataTypes.STRING,
         allowNull: false,
         notEmpty: true
       },
+      sender_address1: {
+        type: DataTypes.STRING,
+      },
+      sender_address2: {
+        type: DataTypes.STRING,
+      },
+      sender_city: {
+        type: DataTypes.STRING,
+      },
+      sender_state: {
+        type: DataTypes.STRING,
+      },
+      sender_zip: {
+        type: DataTypes.STRING,
+      },
+      message: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        notEmpty: true
+      },
+      recipient_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        notEmpty: true
+      },
+      recipient_address1: {
+        type: DataTypes.STRING,
+      },
+      recipient_address2: {
+        type: DataTypes.STRING,
+      },
+      recipient_city: {
+        type: DataTypes.STRING,
+      },
+      recipient_state: {
+        type: DataTypes.STRING,
+      },
+      recipient_zip: {
+        type: DataTypes.STRING,
+      }
 
     }, {
         // timestamps: false,

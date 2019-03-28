@@ -82,18 +82,18 @@
     <div class="card mb-4">
       <div class="card-header">example table</div>
       <div class="card-body">
-        <table class="table table-sm table-hover" id='employee-table'>
+        <table class="table table-sm table-hover">
           <thead>
             <tr>
-              <th scope="col">Employee Name</th>
-              <th scope="col">Role</th>
-              <th scope="col">Start Date</th>
-              <th scope="col">Months Worked</th>
-              <th scope="col">Monthly Rate ($)</th>
-              <th scope="col">Total Billed ($)</th>
+              <th scope="col">Order Number</th>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">Price</th>
+              <th scope="col">Card ID</th>
+              <th scope="col">Quantity</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id='order-history'>
           </tbody>
         </table>
       </div>
@@ -104,7 +104,7 @@
       <p>Footer Text</p>
     </footer>
   </div>
-
+  <script type="text/javascript" src="public/js/home.js"></script>
 </body>
 
 </html>
