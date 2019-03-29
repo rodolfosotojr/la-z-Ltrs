@@ -2,13 +2,10 @@ var db = require("../models");
 var passport = require("../config/passport/passport");
 var request = require('request'); // for AJAX calls
 
+// **PASSPORT** middleware module
+var isAuth = require("../config/passport/isAuth");
 
 module.exports = function (app) {
-  // Displays all of the past orders
-  app.get("/api/orderhistory", function (req, res) {
-    return res.json(pastorders);
-  });
-
   // Register
   app.post("/api/register", function (req, res) {
     console.log(req.body);
@@ -36,6 +33,23 @@ module.exports = function (app) {
     req.logout();
     res.redirect("/");
   });
+
+  // list past orders from Handwrytten
+  app.get("/api/orderhistory", isAuth, function (error, response, body) {
+    request.post({
+      url: 'https://api.handwrytten.com/v1/orders/list',
+      form: {
+        uid: process.env.HANDWRYTTEN_UID
+      }
+    }, function (err, res, body) {
+      if (err) {
+        return console.error('Past orders call failed:', err);
+      }
+      // return BODY JSON OBJECT
+      var info = JSON.parse(body)
+      return response.json(info);
+    })
+  })
 
   // list past orders
   app.post("/api/orders", function (error, response, body) {
