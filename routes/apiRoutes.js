@@ -51,6 +51,38 @@ module.exports = function (app) {
     })
   })
 
+  // list past orders from Handwrytten
+  app.get("/api/savedorders", isAuth, function (req, res) {
+    db.Order.findAll({}).then(function (results) {
+      return res.json(results);
+    })
+  })
+
+  // SINGLE ORDER API ROUTE
+  app.post("/api/createorder", function (req, res) {
+    // NEED TO ADD CURRENT USER ID!!!
+    req.body.UserId = req.user.id;
+    console.log("******ORDER REQ.BODY*******\n ", req.body)
+
+    db.Order.create(req.body).then(function (results) {
+      res.json(results);
+      res.redirect("/home");
+    }).catch(function (err) {
+      console.log(err);
+      res.json(err);
+    });
+
+    // TEST ORDER DO NOT RUN!
+    // var url = "https://api.handwrytten.com/v1/orders/singleStepOrder";
+    // POST Single Order to HandWrytten API
+    // request.post({
+    //   url: url,
+    //   form: put_order_object_here
+    // }, function (error, response, body) {
+    // });
+
+  })
+
   // list past orders
   app.post("/api/orders", function (error, response, body) {
     request.post({
