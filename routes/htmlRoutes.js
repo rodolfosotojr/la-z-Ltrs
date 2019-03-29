@@ -34,9 +34,10 @@ module.exports = function (app) {
 
   //Route to the input page
   // **PASSPORT** - ADDED 'isAuth' middleware to route parameter below
-  app.get("/input", isAuth, function (req, res) {
+  app.get("/newletter", isAuth, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/newLetter.html"));
   });
+
 
   //Route to the how to guide
   app.get("/howTo", function (req, res) {
