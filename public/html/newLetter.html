@@ -11,6 +11,7 @@
     <link rel="icon" href="/public/images/favicon.png" type="image/gif" sizes="4x4">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/public/styles/fonts.css" type="text/css" />
     <style>
         * {
             box-sizing: border-box;
@@ -117,31 +118,6 @@
 
     <div class="container">
         <form id="order">
-            <div class="row">
-                <div class="col-25">
-                    <label for="message">Message</label>
-                    <button id="speech"><i class="fas fa-microphone"></i></button>
-                </div>
-                <div class="col-75">
-                    <textarea id="message" name="message" placeholder="Write something.."
-                        style="height:200px"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="font">Card Format</label>
-                </div>
-                <div class="col-75">
-                    <select id="format">
-                        <option value="" class="">Choose a Card Style</option>
-                        <option value="36">Birthday Wishes</option>
-                        <option value="112">Quill Pen and Ink</option>
-                        <option value="101">I'm really sorry I haven't been in touch.</option>
-                        <option value="82">I Can't Believe You're Graduating!</option>
-                        <option value="43">I'm So Glad We're A Thing</option>
-                    </select>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-25">
@@ -166,6 +142,31 @@
                         <option value="hwMichael" label="Messy Michael">Messy Michael</option>
                         <option value="astRaymond" label="Righteous Rachael">Righteous Rachael</option>
                         <option value="astJohnsonCheryl" label="Loopy Ruthie">Loopy Ruthie</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="message">Message</label>
+                    <button id="speech"><i class="fas fa-microphone"></i></button>
+                </div>
+                <div class="col-75">
+                    <textarea id="message" name="message" placeholder="Write something.."
+                        style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="font">Card Format</label>
+                </div>
+                <div class="col-75">
+                    <select id="format">
+                        <option value="" class="">Choose a Card Style</option>
+                        <option value="36">Birthday Wishes</option>
+                        <option value="112">Quill Pen and Ink</option>
+                        <option value="101">I'm really sorry I haven't been in touch.</option>
+                        <option value="82">I Can't Believe You're Graduating!</option>
+                        <option value="43">I'm So Glad We're A Thing</option>
                     </select>
                 </div>
             </div>

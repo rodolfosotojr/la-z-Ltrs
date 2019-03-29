@@ -13,6 +13,14 @@ $(document).ready(function () {
   var $recipientState = $("input#recip-state");
   var $recipientZIP = $("input#recip-zip");
 
+  $font.change(function(){
+    console.log("You changed!");
+    if ($("#fonttype").val() !== "") {
+      $("#message").css({"font-size": "3em", "font-family": $(this).val()});
+      console.log($(this).val());
+    }
+  })
+
   // When the register button is clicked, we validate the email and password are not blank
   $orderForm.on("submit", function (event) {
     event.preventDefault();
