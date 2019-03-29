@@ -1,38 +1,44 @@
 $(document).ready(function () {
+  // Assign variables to the form elements
   var $orderForm = $("form#order");
-  var $senderName = $("input#sendAd");
-  var $recipientName = $("input#recipName");
-  var $recipientMsg = $("textarea#content");
-  var $font = $("textarea#font");
-  var $format = $("textarea#card-format");
-  // Getting references to our form and input
-  // var $recipientAddress1 = $("input#recipient-address1-input");
-  // var $recipientAddress2 = $("input#recipient-address2-input");
-  // var $recipientCity = $("input#recipient-address2-input");
-  // var $recipientState = $("input#recipient-address2-input");
-  // var $recipientZIP = $("input#recipient-address2-input");
-
+  var $message = $("textarea#message");
+  var $font = $("#fonttype");
+  var $cardFormat = $("#card-format");
+  var $senderName = $("input#sender-name");
+  var $recipientName = $("input#recip-name");
+  var $recipientBusiness = $("input#recip-bus");
+  var $recipientAddress1 = $("input#recip-add1");
+  var $recipientAddress2 = $("input#recip-add2");
+  var $recipientCity = $("input#recip-city");
+  var $recipientState = $("input#recip-state");
+  var $recipientZIP = $("input#recip-zip");
 
   // When the register button is clicked, we validate the email and password are not blank
   $orderForm.on("submit", function (event) {
     event.preventDefault();
+    // get values from form
     var orderData = {
+      message: $message.val(),
+      card_id: $("#format").val(),
+      card_type: $("#format option:selected").text(),
+      font: $("#fonttype").val(),
+      font_label: $("#fonttype option:selected").text(),
       sender_name: $senderName.val().trim(),
       recipient_name: $recipientName.val().trim(),
-      message: $recipientMsg.val()
-    }
-
+      recipient_business_name: $recipientBusiness.val().trim(),
+      recipient_address1: $recipientAddress1.val().trim(),
+      recipient_address2: $recipientAddress2.val().trim(),
+      recipient_city: $recipientCity.val().trim(),
+      recipient_state: $recipientState.val().trim(),
+      recipient_zip: $recipientZIP.val().trim(),
+    };
+    console.log(orderData);
     // Does a post to the register route. If successful, we are redirected to the members page
     // Otherwise we log any errors
-    function createOrder(sender_name, recipient_name, message) {
-      $.post("/api/createorder",
-        {
-          sender_name: sender_name,
-          recipient_name: recipient_name,
-          message: message
-        }
+    function createOrder() {
+      $.post("/api/createorder", orderData
       ).then(function (data) {
-        window.location.replace(data);
+        window.location.href = "/home";
         // window.location.href = "/home";
         // If there's an error, handle it by throwing up a bootstrap alert
       }).catch(handleLoginErr);
@@ -43,23 +49,17 @@ $(document).ready(function () {
       $("#alert").fadeIn(500);
     }
 
-    
-    // Simple validation
-    // if (!orderData.sender_name || !orderData.recipient_name || !orderData.message) {
-    //   return;
-    // }
-    // If we have an email and password, run the registerUser function
-    createOrder(orderData.sender_name, orderData.recipient_name, orderData.message);
+    createOrder();
     // clear form:
-    $orderForm.val("");
-    $senderName.val("");
-    $recipientName.val("");
-    $font.val("");
-    $format.val("");
+    // $orderForm.val("");
+    // $senderName.val("");
+    // $recipientName.val("");
+    // $font.val("");
+    // $format.val("");
 
   });
 
-  $("#speech").on("click", function(e){
+  $("#speech").on("click", function (e) {
     e.preventDefault();
     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     let finalTranscript = '';
@@ -77,7 +77,7 @@ $(document).ready(function () {
           interimTranscript += transcript;
         }
       }
-      document.querySelector("#content").innerHTML = finalTranscript + interimTranscript;
+      document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
     }
     recognition.start();
   })

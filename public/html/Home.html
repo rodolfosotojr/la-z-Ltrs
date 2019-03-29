@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/public/styles/styles.css" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/public/styles/fonts.css" type="text/css" />
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -79,17 +80,17 @@
   </div>
   <h2>Saved Cards</h2>
     <div class="card mb-4">
-      <div class="card-header">example table</div>
       <div class="card-body">
         <table class="table table-sm table-hover">
           <thead>
             <tr>
-              <th scope="col">Order Number</th>
+              <th scope="col">ID</th>
               <th scope="col">From</th>
               <th scope="col">To</th>
-              <th scope="col">Price</th>
-              <th scope="col">Card ID</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Card Type</th>
+              <th scope="col">Card Cover</th>
+              <th scope="col">Font Style</th>
+              <th scope="col">Date Created</th>
             </tr>
           </thead>
           <tbody id='save-history'>
@@ -106,9 +107,10 @@
               <th scope="col">Order Number</th>
               <th scope="col">From</th>
               <th scope="col">To</th>
-              <th scope="col">Price</th>
-              <th scope="col">Card ID</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Card Type</th>
+              <th scope="col">Card Cover</th>
+              <th scope="col">Font Style</th>
+              <th scope="col">Order Date</th>
             </tr>
           </thead>
           <tbody id='order-history'>

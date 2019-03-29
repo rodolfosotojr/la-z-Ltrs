@@ -64,9 +64,8 @@ module.exports = function (app) {
     req.body.UserId = req.user.id;
     console.log("******ORDER REQ.BODY*******\n ", req.body)
 
-    db.Order.create(req.body).then(function (results) {
-      res.json(results);
-      res.redirect("/home");
+    db.Order.create(req.body).then(function () {
+      res.redirect("/");
     }).catch(function (err) {
       console.log(err);
       res.json(err);

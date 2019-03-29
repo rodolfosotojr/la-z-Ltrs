@@ -116,13 +116,15 @@
         <h2 style="text-align: center;">Input Form</h2>
 
         <div class="container">
-            <form action="/action_page.php">
+            <form>
                 <div class="row">
                     <div class="col-25">
                         <label for="content">Message</label>
+                        <button id="speech"><i class="fas fa-microphone"></i></button>
                     </div>
                     <div class="col-75">
-                        <textarea id="message" name="message" style="height:200px"></textarea>
+                        <textarea id="content" name="content" placeholder="Write something.."
+                            style="height:200px"></textarea>
                     </div>
                 </div>
                 <div class="row">
