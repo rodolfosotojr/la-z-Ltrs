@@ -3,7 +3,7 @@ $(document).ready(function () {
   var $orderForm = $("form#order");
   var $message = $("textarea#message");
   var $font = $("#fonttype");
-  var $cardFormat = $("#card-format");
+  var $cardFormat = $("#format");
   var $senderName = $("input#sender-name");
   var $recipientName = $("input#recip-name");
   var $recipientBusiness = $("input#recip-bus");
@@ -14,9 +14,21 @@ $(document).ready(function () {
   var $recipientZIP = $("input#recip-zip");
 
   $font.change(function(){
-    console.log("You changed!");
+    // console.log("You changed!");
     if ($("#fonttype").val() !== "") {
       $("#message").css({"font-size": "3em", "font-family": $(this).val()});
+    }
+  })
+
+  $cardFormat.change(function(){
+    if ($("#format").val() !== "") {
+      // do an AJAX call to get the image
+      url = "https://api.handwrytten.com/v1/cards/view?card_id=" + $(this).val() + "&lowres=1"
+      $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
+        imgUrl = `<img src="${handwrytten.card.cover}" style="width: 125px; height:125px; object-fit: cover">`;
+        $("#card-cover").empty();
+        $("#card-cover").append($(imgUrl));
+      })
       console.log($(this).val());
     }
   })
