@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="icon" href="/public/images/favicon.png" type="image/gif" sizes="4x4">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
@@ -95,77 +97,81 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-inverse">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                  </button>
-                  <a id="logo" href="/"><img src="https://files.slack.com/files-pri/TDW0K65GT-FHE4PA6DV/image.png" alt="logo" height="60px;" style="margin: 15px;"></a>
-                  <a type="submit" class="btn btn-default" href="/howto" style="margin: 15px; font-size: 25px;">How To</a>
-                  <a type="submit" class="btn btn-default" href="/newLetter" style="margin: 15px; font-size: 25px;">New Letter</a>
-                  <a href="https://www.handwrytten.com/" class="btn btn-default" input type='submit' value='go to handwrytten'style="margin: 15px; font-size: 25px;">Handwrytten Homepage</a>
-                  <a type="submit" class="btn btn-default" href="/" style="margin: 15px; font-size: 25px;">login</a>
-                </div>
-                </ul>
-              </nav>
-
-            <h2 style="text-align: center;">Input Form</h2>
-
-        <div class="container">
-            <form action="/action_page.php">
-                <div class="row">
-                    <div class="col-25">
-                        <label for="recipAd">recipient address</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="recipAd" name="recipAd" placeholder="recipient address...">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="sendAd">sender address </label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="sendAd" name="sendAd" placeholder="sender address..">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="content">content</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="content" name="content" placeholder="Write something.."
-                            style="height:200px"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="font">font</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="font" name="font" placeholder="pick your style.." style="height:200px"></textarea>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-25">
-                        <label for="card format">card format</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="card format" name="card format" placeholder="card formatting.."
-                            style="height:200px"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <input type="submit" value="Submit">
-                </div>
-            </form>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            </button>
+            <a id="logo" href="/"><img src="https://files.slack.com/files-pri/TDW0K65GT-FHE4PA6DV/image.png" alt="logo"
+                    height="60px;" style="margin: 15px;"></a>
+            <a type="submit" class="btn btn-default" href="/howto" style="margin: 15px; font-size: 25px;">How To</a>
+            <a type="submit" class="btn btn-default" href="/newLetter" style="margin: 15px; font-size: 25px;">New
+                Letter</a>
+            <a href="https://www.handwrytten.com/" class="btn btn-default" input type='submit' value='go to handwrytten'
+                style="margin: 15px; font-size: 25px;">Handwrytten Homepage</a>
+            <a type="submit" class="btn btn-default" href="/" style="margin: 15px; font-size: 25px;">login</a>
         </div>
-        <div>
-            <footer class="container-fluid text-center">
-                <p>Footer Text</p>
-            </footer>
-        </div>
-        <script type="text/javascript" src="public/js/newletter.js"></script>
-    </body>
+        </ul>
+    </nav>
+
+    <h2 style="text-align: center;">Input Form</h2>
+
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="col-25">
+                    <label for="recipAd">recipient address</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="recipAd" name="recipAd" placeholder="recipient address...">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="sendAd">sender address </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="sendAd" name="sendAd" placeholder="sender address..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="content">content</label>
+                    <button id="speech"><i class="fas fa-microphone"></i></button>
+                </div>
+                <div class="col-75">
+                    <textarea id="content" name="content" placeholder="Write something.."
+                        style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="font">font</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="font" name="font" placeholder="pick your style.." style="height:200px"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="card format">card format</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="card format" name="card format" placeholder="card formatting.."
+                        style="height:200px"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <div>
+        <footer class="container-fluid text-center">
+            <p>Footer Text</p>
+        </footer>
+    </div>
+    <script type="text/javascript" src="public/js/newletter.js"></script>
+</body>
 
 </html>
