@@ -1,27 +1,31 @@
-#test{
+
+#navbar1{
     background-color: #4c4947;
+    margin-bottom: 0;
+    border-radius: 0;
 }
 @media (min-width: 200px) and (max-width: 767.98px) { 
-#test{
+#navbar1{
     min-height:100px;
     background-color: #4c4947;
 }
 }
 
 @media (min-width: 100px) and (max-width: 500.98px) { 
-#test{
+#navbar1{
     min-height:50px;
     background-color: #4c4947;
 }
 }
 
 @media (min-width: 50px) and (max-width: 250.98px) { 
-#test{
+#navbar1{
     min-height:25px;
     background-color: #4c4947;
 
 }
 }
+
 
 #t2{
     background-color:#6ead3a;
@@ -165,11 +169,13 @@
   .btn-default {
     color: #333;
     background-color: #fff;
-    border-color: #ccc;
+    border-color: black;
     font-size: 20px;
+    border-width: 2px;
 }
-.navbar {
-    margin-bottom: 0;
-    border-radius: 0;
-    background-color: whitesmoke;
+
+
+  #logo {
+      border:30px;
+      border-color: aquamarine;
   }
