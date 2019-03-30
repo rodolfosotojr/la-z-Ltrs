@@ -18,9 +18,9 @@ $(document).ready(function () {
               <td><img src="${handwrytten.card.cover}" style="width: 75px; height:75px; object-fit: cover"></td>
               <td style="font-family: ${item.font}; font-size: 2em;">${item.font_label}</td>
               <td>${item.createdAt}</td>
-              <td><button class="update btn btn-secondary" data-id="${item.id}">Edit</button></td>
-              <td><button class="delete btn btn-danger" data-id="${item.id}">Delete</button></td>
-              <td><button class="complete-order edit btn btn-warning" data-id="${item.id}">Order</button></td>
+              <td><a class="update btn btn-secondary" data-id="${item.id}">Edit</a></td>
+              <td><a class="delete btn btn-danger" data-id="${item.id}">Delete</a></td>
+              <td><a class="complete-order edit btn btn-warning" data-id="${item.id}">Order</a></td>
             </tr>
             `
             $("#save-history").append($(row));
@@ -53,19 +53,32 @@ $(document).ready(function () {
       })
   }
 
-  $(document).on("click", ".update", function () {
+  $(document).on("click", ".update", function (event) {
+    event.preventDefault();
     // get ID from button's data-id then send to /api/order/:id
     var orderId = $(this).attr("data-id");
     alert("UPDATE ORDER CALL AT /api/updateorder/" + orderId);
     // window.location.href = "/api/order/" + orderId;
   })
 
-  $(document).on("click", ".delete", function () {
+  $(document).on("click", ".delete", function (event) {
+    event.preventDefault();
     var orderId = $(this).attr("data-id");
     alert("DELETE ORDER CALL at /api/deleteorder/" + orderId);
+    // $.ajax({
+    //   method: "DELETE",
+    //   url: "/api/order/" + orderId,
+    //   success: function(data) {
+    //     window.location.reload();
+    //   }
+    // })
+    //   .then(function () {
+
+    //   });
   })
 
-  $(document).on("click", ".complete-order", function () {
+  $(document).on("click", ".complete-order", function (event) {
+    event.preventDefault();
     var orderId = $(this).attr("data-id");
     alert("COMPLETE ORDER CALL at /api/submitorder/" + orderId);
   })

@@ -61,9 +61,7 @@ module.exports = function (app) {
     })
   })
 
-
-
-  // get single order
+  // WIP get single order
   app.get("/api/order/:id", function (req, res) {
 
     db.Order.findOne({
@@ -123,7 +121,8 @@ module.exports = function (app) {
   // Delete an example by id
   app.delete("/api/order/:id", function (req, res) {
     db.Order.destroy({ where: { id: req.params.id } }).then(function (dbOrder) {
-      res.json(dbOrder);
+
+      res.json(dbOrder.id);
     });
   });
 };
