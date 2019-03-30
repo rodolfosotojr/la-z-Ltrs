@@ -1,8 +1,17 @@
 # La-Z Ltrs
 
 ## Overview
+What our app does
+A simplistic way of sending personalized, hand-written notes to recipients that are deserving. Users will have the ability to use speech to text software for crafting note content, an option to customize the format of the note and handwriting style to craft notes that will be parsed as JSON objects that can be imported to HandWrytten. HandWrytten will charge the user for the note they are trying to send.
 
-## Exaample Screenshots
+Why our app is useful
+
+Users can send handwritten letters quickly and cleanly by speaking or typing their sentiments. This will enable users to free their hands, keep concentration in efficiently composing notes, reference historical note orders and socialize with other users by viewing their notes. 
+
+As Susan Lendroth said:
+"To write is human, to receive a letter: Devine!"
+
+## Example Screenshots
 
 ## Getting Started
 
