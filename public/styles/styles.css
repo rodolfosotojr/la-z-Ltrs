@@ -1,0 +1,173 @@
+#test{
+    background-color: #4c4947;
+}
+@media (min-width: 200px) and (max-width: 767.98px) { 
+#test{
+    min-height:100px;
+    background-color: #4c4947;
+}
+}
+
+@media (min-width: 100px) and (max-width: 500.98px) { 
+#test{
+    min-height:50px;
+    background-color: #4c4947;
+}
+}
+
+@media (min-width: 50px) and (max-width: 250.98px) { 
+#test{
+    min-height:25px;
+    background-color: #4c4947;
+
+}
+}
+
+#t2{
+    background-color:#6ead3a;
+}
+
+@media (min-width: 20px) and (max-width: 100.98px) { 
+#t2{
+    min-height:10px;
+    background-color: #6ead3a;
+}
+}
+
+#t2{
+    background-color:#6ead3a;
+}
+@media (min-width: 200px) and (max-width: 767.98px) { 
+#t2{
+    min-height:100px;
+    background-color: #6ead3a;
+}
+}
+
+@media (min-width: 100px) and (max-width: 500.98px) { 
+#t2{
+    min-height:50px;
+    background-color: #6ead3a;
+}
+}
+
+@media (min-width: 50px) and (max-width: 250.98px) { 
+#t2{
+    min-height:25px;
+    background-color: #6ead3a;
+
+}
+}
+
+
+@media (min-width: 20px) and (max-width: 100.98px) { 
+#t2{
+    min-height:10px;
+    background-color: #6ead3a;
+}
+}
+
+#t3{
+    background-color:#6ead3a;
+}
+@media (min-width: 200px) and (max-width: 767.98px) { 
+#t3{
+    min-height:100px;
+    background-color: #6ead3a;
+}
+}
+
+@media (min-width: 100px) and (max-width: 500.98px) { 
+#t3{
+    min-height:50px;
+    background-color: #6ead3a;
+}
+}
+
+@media (min-width: 50px) and (max-width: 250.98px) { 
+#t3{
+    min-height:25px;
+    background-color: #6ead3a;
+
+}
+}
+
+@media (min-width: 20px) and (max-width: 100.98px) { 
+#t3{
+    min-height:10px;
+    background-color:#6ead3a;
+}
+}
+
+#CC {
+    background-color: #6ead3a;
+    margin: 0px;
+}
+
+/* card created table */
+#cardCr {
+    background-color: #6ead3a
+}
+
+#foot{
+    background-color: #4c4947;
+    margin-top: -2%;
+}
+@media (min-width: 200px) and (max-width: 767.98px) { 
+    #foot{
+        min-height:100px;
+        background-color: #4c4947;
+        margin-top: -3%;
+    }
+    }
+    
+    @media (min-width: 100px) and (max-width: 500.98px) { 
+    #foot{
+        min-height:50px;
+        background-color: #4c4947;
+        margin-top: -4%;
+    }
+    }
+    
+    @media (min-width: 50px) and (max-width: 250.98px) { 
+    #foot{
+        min-height:25px;
+        background-color: #4c4947;
+        margin-top: -5%;
+
+    }
+    }
+    
+    
+    @media (min-width: 20px) and (max-width: 100.98px) { 
+    #foot{
+        min-height:10px;
+        background-color: #4c4947;
+        margin-top: -6%;
+
+    }
+    }
+
+/* card image */
+.responsive {
+    width: 100%;
+    height: auto;
+  }
+  /* logo image */
+.res {
+    width: 25%;
+    height: auto;
+  }
+
+  /* all buttons */
+  .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    font-size: 20px;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: whitesmoke;
+  }
