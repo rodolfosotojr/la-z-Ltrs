@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../styles/styles.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="icon" href="/public/images/favicon.png" type="image/gif" sizes="4x4">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
@@ -120,44 +122,40 @@
                         <input type="text" id="recipAd" name="recipAd" placeholder="recipient address...">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="sendAd">sender address </label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="sendAd" name="sendAd" placeholder="sender address..">
-                    </div>
+                <div class="col-75">
+                    <input type="text" id="sendAd" name="sendAd" placeholder="sender address..">
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="content">content</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="content" name="content" placeholder="Write something.."
-                            style="height:200px"></textarea>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="content">content</label>
+                    <button id="speech"><i class="fas fa-microphone"></i></button>
                 </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="font">font</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="font" name="font" placeholder="pick your style.." style="height:200px"></textarea>
-                    </div>
+                <div class="col-75">
+                    <textarea id="content" name="content" placeholder="Write something.."
+                        style="height:200px"></textarea>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="font">font</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="font" name="font" placeholder="pick your style.." style="height:200px"></textarea>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-25">
-                        <label for="card format">card format</label>
-                    </div>
-                    <div class="col-75">
-                        <textarea id="card format" name="card format" placeholder="card formatting.."
-                            style="height:200px"></textarea>
-                    </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="card format">card format</label>
                 </div>
-                <div class="row">
-                    <input type="submit" value="Submit">
+                <div class="col-75">
+                    <textarea id="card format" name="card format" placeholder="card formatting.."
+                        style="height:200px"></textarea>
                 </div>
+                           <div class="row">
+                <input type="submit" value="Submit">
+            </div>
             </form>
         </div>
         <div>
