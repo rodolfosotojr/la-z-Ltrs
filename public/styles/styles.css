@@ -100,18 +100,20 @@
 }
 
 #CC {
-    background-color: #6ead3a;
+    background-color: white;
     margin: 0px;
 }
 
 /* card created table */
 #cardCr {
-    background-color: #6ead3a
+    background-color: white;
 }
 
 #foot{
     background-color: #4c4947;
     margin-top: -2%;
+    font-size: 20px;
+    color: white;
 }
 @media (min-width: 200px) and (max-width: 767.98px) { 
     #foot{
