@@ -34,7 +34,17 @@ module.exports = function (app) {
     res.redirect("/");
   });
 
-  // list past orders from Handwrytten
+  // ***MySQL*** list past orders
+  app.get("/api/savedorders", isAuth, function (req, res) {
+    db.Order.findAll({
+      where: { userId: req.user.id },
+      // include: [db.User]
+    }).then(function (results) {
+      return res.json(results);
+    })
+  })
+
+  // ***Handwrytten*** list past orders
   app.get("/api/orderhistory", isAuth, function (error, response, body) {
     request.post({
       url: 'https://api.handwrytten.com/v1/orders/list',
@@ -51,12 +61,20 @@ module.exports = function (app) {
     })
   })
 
-  // list past orders from Handwrytten
-  app.get("/api/savedorders", isAuth, function (req, res) {
-    db.Order.findAll({}).then(function (results) {
-      return res.json(results);
-    })
-  })
+
+
+  // get single order
+  app.get("/api/order/:id", function (req, res) {
+
+    db.Order.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.User]
+    }).then(function (dbOrder) {
+      res.json(dbOrder);
+    });
+  });
 
   // SINGLE ORDER API ROUTE
   app.post("/api/createorder", function (req, res) {
@@ -102,17 +120,10 @@ module.exports = function (app) {
     })
   })
 
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
-    });
-  });
-
   // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.json(dbExample);
+  app.delete("/api/order/:id", function (req, res) {
+    db.Order.destroy({ where: { id: req.params.id } }).then(function (dbOrder) {
+      res.json(dbOrder);
     });
   });
 };
