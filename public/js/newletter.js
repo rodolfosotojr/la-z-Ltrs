@@ -12,15 +12,19 @@ $(document).ready(function () {
   var $recipientCity = $("input#recip-city");
   var $recipientState = $("input#recip-state");
   var $recipientZIP = $("input#recip-zip");
+  var init = false;
+  window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+  var finalTranscript = '';
+  var recognition = new window.SpeechRecognition();
 
-  $font.change(function(){
+  $font.change(function () {
     // console.log("You changed!");
     if ($("#fonttype").val() !== "") {
-      $("#message").css({"font-size": "3em", "font-family": $(this).val()});
+      $("#message").css({ "font-size": "3em", "font-family": $(this).val() });
     }
-  })
+  });
 
-  $cardFormat.change(function(){
+  $cardFormat.change(function () {
     if ($("#format").val() !== "") {
       // do an AJAX call to get the image
       url = "https://api.handwrytten.com/v1/cards/view?card_id=" + $(this).val() + "&lowres=1"
@@ -31,7 +35,7 @@ $(document).ready(function () {
       })
       console.log($(this).val());
     }
-  })
+  });
 
   // When the register button is clicked, we validate the email and password are not blank
   $orderForm.on("submit", function (event) {
@@ -52,6 +56,7 @@ $(document).ready(function () {
       recipient_state: $recipientState.val().trim(),
       recipient_zip: $recipientZIP.val().trim(),
     };
+
     console.log(orderData);
     // Does a post to the register route. If successful, we are redirected to the members page
     // Otherwise we log any errors
@@ -62,12 +67,12 @@ $(document).ready(function () {
         // window.location.href = "/home";
         // If there's an error, handle it by throwing up a bootstrap alert
       }).catch(handleLoginErr);
-    }
+    };
 
     function handleLoginErr(err) {
       $("#alert .msg").text(err.responseJSON);
       $("#alert").fadeIn(500);
-    }
+    };
 
     createOrder();
     // clear form:
@@ -76,21 +81,16 @@ $(document).ready(function () {
     // $recipientName.val("");
     // $font.val("");
     // $format.val("");
-
   });
 
-  $("#speech").on("click", function (e) {
-    e.preventDefault();
-    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-    let finalTranscript = '';
-    let recognition = new window.SpeechRecognition();
+  function Speech() {
     recognition.interimResults = true;
     recognition.maxAlternatives = 10;
     recognition.continuous = true;
-    recognition.onresult = (event) => {
-      let interimTranscript = '';
-      for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
-        let transcript = event.results[i][0].transcript;
+    recognition.onresult = function (event) {
+      var interimTranscript = '';
+      for (var i = event.resultIndex, len = event.results.length; i < len; i++) {
+        var transcript = event.results[i][0].transcript;
         if (event.results[i].isFinal) {
           finalTranscript += transcript;
         } else {
@@ -99,8 +99,19 @@ $(document).ready(function () {
       }
       document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
     }
-    recognition.start();
-  })
+  };
 
+  $("#speech").on("click", function (e) {
+    e.preventDefault();
+    init = !init;
+
+    if (init) {
+      Speech();
+      recognition.start();
+    } else {
+      Speech();
+      recognition.stop();
+    }
+  });
 
 });
