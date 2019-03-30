@@ -7,17 +7,22 @@ $(document).ready(function () {
       .then(function (savedorder) {
         console.log("***************SAVED ORDER HISTORY:\n", savedorder);
         savedorder.forEach(function (item) {
-          row = `
-          <tr>
-            <td>${item.id}</td>
-            <td>${item.sender_name}</td>
-            <td>${item.recipient_name}</td>
-            <td>${item.recipient_address1}</td>
-            <td><img src="${item.recipient_address2}" style="width: 75px; height:75px; object-fit: cover"></td>
-            <td>${item.recipient_city}</td>
-          </tr>
-          `
-          $("#save-history").append($(row));
+          url = "https://api.handwrytten.com/v1/cards/view?card_id=" + item.card_id + "&lowres=1"
+          $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
+            row = `
+            <tr>
+              <td>${item.id}</td>
+              <td>${item.sender_name}</td>
+              <td>${item.recipient_name}</td>
+              <td>${item.card_type}</td>
+              <td><img src="${handwrytten.card.cover}" style="width: 75px; height:75px; object-fit: cover"></td>
+              <td style="font-family: ${item.font}; font-size: 2em;">${item.font_label}</td>
+              <td>${item.createdAt}</td>
+            </tr>
+            `
+            $("#save-history").append($(row));
+
+          })
         })
       })
   }
@@ -37,7 +42,8 @@ $(document).ready(function () {
             <td>${item.address_to.name}</td>
             <td>${item.card.name}</td>
             <td><img src="${item.card.cover}" style="width: 75px; height:75px; object-fit: cover"></td>
-            <td>${item.card.quantity}</td>
+            <td style="font-family: ${item.font}; font-size: 2em;">${item.fontInfo.label}</td>
+            <td>${item.date_created}</td>
           </tr>
           `
           $("#order-history").append($(row));

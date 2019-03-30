@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'astDunn';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/5c740f10246edastDunn.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'astJohnsonCheryl';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/568f9afa2af985667bdfe56d59astJohnsonCheryl.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'astRaymond';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/579b94080e9ceastRaymond.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_579b94081d76aastRaymond.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwCharity';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwCharity.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_581a7e16030c7astBecca.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwDarleen';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwDarleen.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_5acbb84b2f04bastCoach.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwJeff';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwJeff.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwJenna';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwJenna.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwKelsey';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwKelsey.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_5a9ec1cbd4e12astTracy.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwLulu';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwLulu.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwMason';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwMason.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_581bc2cf6912castRobertsStephanie.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwMichael';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/5c704bf7743c2astMenshikTom.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_5c704bf79c437astMenshikTom.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwNick';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/5c917b2db0b97hwNick.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwRyan';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwRyan.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_570c434be817dastNelson.eot?') format('eot') ;
+    }
+
+@font-face {
+    font-family: 'hwSaige';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/5c706318c0437hwSaige.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwSteve';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwSteve.ttf') format('truetype')
+            ;
+    }
+
+@font-face {
+    font-family: 'hwWill';
+    src: url('https://d3e924qpzqov0g.cloudfront.net/fonts/hwWill.ttf') format('truetype')
+            , url('https://d3e924qpzqov0g.cloudfront.net/fonts/_oet_5aada2ca47325astBowen.eot?') format('eot') ;
+    }
