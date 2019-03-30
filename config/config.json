@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Blink182!",
+    "password": "password",
     "database": "project2_db",
     "host": "localhost",
     "dialect": "mysql"
