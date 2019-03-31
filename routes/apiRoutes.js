@@ -71,8 +71,8 @@ module.exports = function (app) {
         id: req.params.id
       },
       include: [db.User]
-    }).then(function (dbOrder) {
-      res.json(dbOrder);
+    }).then(function (orderData) {
+      res.json(orderData);
     });
   });
 
@@ -120,6 +120,18 @@ module.exports = function (app) {
     })
   })
 
+  // PUT route for updating posts
+  app.put("/api/update/:id", function(req, res) {
+    db.Order.update(
+      req.body,
+      {
+        where: {
+          id: req.params.id
+        }
+      }).then(function(dbPost) {
+      res.json(dbPost);
+    });
+  });
   // Delete an example by id
   app.delete("/api/order/:id", isAuth, function (req, res) {
     var orderId = req.params.id;

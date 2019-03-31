@@ -11,8 +11,8 @@ $(document).ready(function () {
         // console.log("***************SAVED ORDER HISTORY:\n", savedorder);
         savedorder.forEach(function (item) {
           // var orderDate = moment(item.createdAt, moment.ISO_8601).format("MMM DD, YYYY hh:mm a");
-          var orderDate = moment.utc(item.createdAt).local().format("MMM DD, YYYY hh:mm a");
-          url = "https://api.handwrytten.com/v1/cards/view?card_id=" + item.card_id + "&lowres=1"
+          var orderDate = moment.utc(item.updatedAt).local().format("MMM DD, YYYY hh:mm a");
+          url = "https://api.handwrytten.com/v1/cards/view?card_id=" + item.card_id + "&lowres=1";
           $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
             var buttonColor;
             var buttonStatus;
@@ -46,7 +46,6 @@ $(document).ready(function () {
 
   // HANDWRYTREEN ORDERS
   function getOrders() {
-
     // show past orders
     $.ajax({ url: "/api/orderhistory", method: "GET" })
       .then(function (order) {
@@ -60,7 +59,7 @@ $(document).ready(function () {
         <td>${item.address_to.name}</td>
         <td>${item.card.name}</td>
         <td><img src="${item.card.cover}" style="width: 75px; height:75px; object-fit: cover"></td>
-        <td style="font-family: ${item.font}; font-size: 2em;">${item.fontInfo.label}</td>
+        <td style="font-family: ${item.font}; font-size: 3em;">${item.fontInfo.label}</td>
         <td>${orderDate}</td>
         </tr>
         `
@@ -69,12 +68,15 @@ $(document).ready(function () {
       })
   }
 
+  // UPDATE order
   $(document).on("click", ".update", function (event) {
     event.preventDefault();
     // get ID from button's data-id then send to /api/order/:id
     var orderId = $(this).attr("data-id");
-    alert("UPDATE ORDER CALL AT /api/updateorder/" + orderId);
-    // window.location.href = "/api/order/" + orderId;
+    // alert("UPDATE ORDER CALL AT /update?orderid=" + orderId);
+
+    // Load page using a query string ?orderid=orderId
+    window.location.href = "/update?orderid=" + orderId;
   })
 
   // confirm delete modal
