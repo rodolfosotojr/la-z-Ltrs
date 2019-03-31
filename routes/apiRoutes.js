@@ -38,6 +38,9 @@ module.exports = function (app) {
   app.get("/api/savedorders", isAuth, function (req, res) {
     db.Order.findAll({
       where: { userId: req.user.id },
+      order: [
+        ['updatedAt', 'DESC'],
+    ],
       // include: [db.User]
     }).then(function (results) {
       return res.json(results);
@@ -63,7 +66,6 @@ module.exports = function (app) {
 
   // WIP get single order
   app.get("/api/order/:id", function (req, res) {
-
     db.Order.findOne({
       where: {
         id: req.params.id
@@ -119,10 +121,19 @@ module.exports = function (app) {
   })
 
   // Delete an example by id
-  app.delete("/api/order/:id", function (req, res) {
-    db.Order.destroy({ where: { id: req.params.id } }).then(function (dbOrder) {
+  app.delete("/api/order/:id", isAuth, function (req, res) {
+    var orderId = req.params.id;
+    var userId = req.user.id;
+    console.log(`----=====DELETE=====----\nCurrent User ID: ${userId}, Order userId: ${orderId}`);
+    
+    // FUTURE TODO- first check if current user id matches userId of the order
+    // if (req.user.id === orderId) {
+      db.Order.destroy({
+         where: { id: orderId } 
+        }).then(function (dbOrder) {
+        res.json(dbOrder);
+      });
 
-      res.json(dbOrder.id);
-    });
+    // }
   });
 };

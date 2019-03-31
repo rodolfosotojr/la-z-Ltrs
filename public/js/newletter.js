@@ -10,7 +10,7 @@ $(document).ready(function () {
   var $recipientAddress1 = $("input#recip-add1");
   var $recipientAddress2 = $("input#recip-add2");
   var $recipientCity = $("input#recip-city");
-  var $recipientState = $("input#recip-state");
+  var $recipientState = $("#recip-state");
   var $recipientZIP = $("input#recip-zip");
   var init = false;
   window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -53,7 +53,7 @@ $(document).ready(function () {
       recipient_address1: $recipientAddress1.val().trim(),
       recipient_address2: $recipientAddress2.val().trim(),
       recipient_city: $recipientCity.val().trim(),
-      recipient_state: $recipientState.val().trim(),
+      recipient_state: $recipientState.val(),
       recipient_zip: $recipientZIP.val().trim(),
     };
 

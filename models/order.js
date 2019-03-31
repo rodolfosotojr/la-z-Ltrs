@@ -60,6 +60,10 @@ module.exports = function (sequelize, DataTypes) {
     },
     recipient_zip: {
       type: DataTypes.STRING,
+    },
+    order_processed: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
 
   }, {
