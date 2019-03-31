@@ -38,16 +38,15 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/html/newLetter.html"));
   });
 
-
   //Route to the how to guide
   app.get("/howTo", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/html/howTo.html"));
   });
 
-  // Displays all of the past orders
-  // MOVED TO apiRoutes
+  app.get("/update", isAuth, function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/html/update.html"));
+  });
 
-  // Render 404 page for any unmatched routes
   // app.get("*", function (req, res) {
   //   res.redirect("/");
   // });

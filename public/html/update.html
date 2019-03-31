@@ -2,126 +2,48 @@
 <html lang="en">
 
 <head>
-    <title>Edit Letter Page</title>
+    <title>Update Letter Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="icon" href="/public/images/favicon.png" type="image/gif" sizes="4x4">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
-</head>
-<style>
-    /* * {
-        box-sizing: border-box;
-    } */
 
-    input[type=text],
-    select,
-    textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-    }
-
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-        background-color: whitesmoke;
-    }
-
-    label {
-        padding: 12px 12px 12px 0;
-        display: inline-block;
-    }
-
-    input[type=submit] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        float: right;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    .container {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    /* Set black background color, white text and some padding */
-    footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-    }
-
-    .col-25 {
-        float: left;
-        width: 25%;
-        margin-top: 6px;
-    }
-
-    .col-75 {
-        float: left;
-        width: 75%;
-        margin-top: 6px;
-    }
-
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-    /* @media screen and (max-width: 600px) {
-
-        .col-25,
-        .col-75,
-        input[type=submit] {
-            width: 100%;
-            margin-top: 0;
-        }
-    } */
-</style>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="public/styles/styles.css" />
+    <link rel="stylesheet" href="/public/styles/fonts.css" type="text/css" />
 
 <body>
-    <nav class="navbar navbar-inverse" id="test">
+    <nav class="navbar navbar-inverse" id="navbar1">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
             </button>
-            <a id="logo" href="/"><img src="public/images/logo.jpeg" alt="logo" class="res"></a>
+            <a id="logo" href="/"><img src="public/images/Blank Diagram-min.jpeg" alt="logo" class="res"></a>
             <a type="submit" class="btn btn-default" href="/howto">How To</a>
             <a type="submit" class="btn btn-default" href="/newLetter">New Letter</a>
             <a href="https://www.handwrytten.com/" class="btn btn-default" input type='submit'
                 value='go to handwrytten'>Handwrytten Homepage</a>
-            <a type="submit" class="btn btn-default" href="/">login</a>
+            <a type="submit" class="btn btn-default" href="/api/logout">logout</a>
         </div>
         </ul>
     </nav>
 
-    <h2 style="text-align: center;">Input Form</h2>
+    <h2 style="text-align: center;">Update Letter Form</h2>
 
     <div class="container">
-        <form id="order">
-
+        <form id="update-order">
             <div class="row">
-                <div class="col-25">
-                    <label for="card-format">Font Name</label>
+                <div class="form-group col-md-12">
+                    <!-- <label for="sendAd">Sender Name</label> -->
+                    <input type="text" id="sender-name" name="sender-name" placeholder="Sender Name">
                 </div>
-                <div class="col-75">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <!-- <label for="card-format">Font Name</label> -->
                     <select id="fonttype">
                         <option value="" class="">Choose a Handwryting Style</option>
                         <option value="hwJeff" label="Proper Jeff">Proper Jeff</option>
@@ -142,22 +64,9 @@
                         <option value="astJohnsonCheryl" label="Loopy Ruthie">Loopy Ruthie</option>
                     </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="message">Message</label>
-                    <button id="speech"><i class="fas fa-microphone"></i></button>
-                </div>
-                <div class="col-75">
-                    <textarea id="message" name="message" placeholder="Write something.."
-                        style="height:200px"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="font">Card Format</label>
-                </div>
-                <div class="col-75">
+
+                <div class="form-group col-md-4">
+                    <!-- <label for="font">Card Format</label> -->
                     <select id="format">
                         <option value="" class="">Choose a Card Style</option>
                         <option value="36">Birthday Wishes</option>
@@ -176,84 +85,126 @@
                         <option value="2793">Cheers To The New Year</option>
                     </select>
                 </div>
-                <div id="card-cover"></div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="sendAd">Sender Name</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="sender-name" name="sender-name">
+                <div class="form-group col-md-4">
+                    <div id="card-cover"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient Name</label>
+                <div class="form-group col-md-2">
+                    <label for="message">Message <button id="speech"><i class="fas fa-microphone"></i></button></label>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="recip-name" name="recip-name">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient Business Name</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="recip-bus" name="recip-bus">
+                <div class="form-group col-md-10">
+                    <textarea id="message" name="message" placeholder="Write something.."
+                        style="height:200px"></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient Address 1</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="recip-add1" name="recip-add1">
+                <div class="form-group col-md-12">
+                    <!-- <label for="recipAd">Recipient Name</label> -->
+                    <input type="text" id="recip-name" name="recip-name" placeholder="Recipient Name">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient Address 2</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="recip-add2" name="recip-add2">
+                <div class="form-group col-md-12">
+                    <!-- <label for="recipAd">Recipient Business Name</label> -->
+                    <input type="text" id="recip-bus" name="recip-bus" placeholder="Recipient Business Name">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient City</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="recip-city" name="recip-city">
+                <div class="form-group col-md-12">
+                    <!-- <label for="recipAd">Recipient Address 1</label> -->
+                    <input type="text" id="recip-add1" name="recip-add1" placeholder="Recipient Address 1">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient State</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="recip-state" name="recip-state">
+                <div class="form-group col-md-12">
+                    <!-- <label for="recipAd">Recipient Address 2</label> -->
+                    <input type="text" id="recip-add2" name="recip-add2" placeholder="Recipient Address 2">
                 </div>
             </div>
             <div class="row">
-                <div class="col-25">
-                    <label for="recipAd">Recipient ZIP</label>
+                <div class="form-group col-md-6">
+                    <!-- <label for="recipAd">Recipient City</label> -->
+                    <input type="text" id="recip-city" name="recip-city" placeholder="Recipient City">
                 </div>
-                <div class="col-75">
-                    <input type="text" id="recip-zip" name="recip-zip">
+                <div class="form-group col-md-3">
+                    <!-- <label for="recipAd">Recipient State</label> -->
+                    <!-- <input type="text" id="recip-state" name="recip-state"> -->
+                    <select id="recip-state">
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <!-- <label for="recipAd">Recipient ZIP</label> -->
+                    <input type="text" id="recip-zip" name="recip-zip" placeholder="Recipient ZIP">
                 </div>
             </div>
 
             <div class="row">
-                <input type="submit" value="Submit">
+                <div class="form-group col-md-12">
+                    <a href="/home" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
             </div>
         </form>
     </div>
     <div>
-        <footer class="container-fluid text-center" >
+        <footer class="container-fluid text-center">
             <p>..Speak your sentiments</p>
         </footer>
     </div>
-    <script type="text/javascript" src="public/js/newletter.js"></script>
+    <script type="text/javascript" src="public/js/update.js"></script>
 </body>
 
 </html>

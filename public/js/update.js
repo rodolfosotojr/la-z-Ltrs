@@ -1,19 +1,6 @@
 $(document).ready(function () {
-    // get ID from query string
-    var url = window.location.search;
-    var orderId;
-    // Sets a flag for whether or not we're updating a post to be false initially
-    var isUpdated = false;
-
-    // If we have this section in our url, we pull out the post id from the url
-    // In localhost:8080/cms?post_id=1, orderId is 1
-    if (url.indexOf("?post_id=") !== -1) {
-        orderId = url.split("=")[1];
-        getPostData(orderId);
-    }
-
     // Assign variables to the form elements
-    var $updateForm = $("form#updateorder");
+    var $updateForm = $("form#update-order");
     var $message = $("textarea#message");
     var $font = $("#fonttype");
     var $cardFormat = $("#format");
@@ -25,6 +12,40 @@ $(document).ready(function () {
     var $recipientCity = $("input#recip-city");
     var $recipientState = $("input#recip-state");
     var $recipientZIP = $("input#recip-zip");
+    var orderId;
+    // get ID from query string
+    var url = window.location.search;
+    // extract the orderId number using indexOf
+    if (url.indexOf("?orderid=") !== -1) {
+        orderId = url.split("=")[1];
+        getOrder();
+    } else  {
+        window.location.href = "/home";
+    }
+
+    // Get the Single Order
+    function getOrder() {
+        qryURL = "/api/order/" + orderId;
+        $.get(qryURL, function(orderData) {
+            console.log(orderData);
+            // assign all the data to the form
+            $message.val(orderData.message);
+            $("#format").val(orderData.card_id).change();
+            // $("#format option:selected").text(orderData);
+            $("#fonttype").val(orderData.font).change();
+            // $("#fonttype option:selected").text(orderData);
+            $senderName.val(orderData.sender_name);
+            $recipientName.val(orderData.recipient_name);
+            $recipientBusiness.val(orderData.recipient_business_name);
+            $recipientAddress1.val(orderData.recipient_address1);
+            $recipientAddress2.val(orderData.recipient_address2);
+            $recipientCity.val(orderData.recipient_city);
+            $recipientState.val(orderData.recipient_state);
+            $recipientZIP.val(orderData.recipient_zip);
+        }) 
+    }
+
+
 
 
     $font.change(function () {
@@ -48,10 +69,10 @@ $(document).ready(function () {
     })
 
     // When the register button is clicked, we validate the email and password are not blank
-    $orderForm.on("submit", function (event) {
+    $updateForm.on("submit", function (event) {
         event.preventDefault();
-        // get values from form
-        var orderData = {
+        // update the values from form
+        orderData = {
             message: $message.val(),
             card_id: $("#format").val(),
             card_type: $("#format option:selected").text(),
@@ -63,24 +84,20 @@ $(document).ready(function () {
             recipient_address1: $recipientAddress1.val().trim(),
             recipient_address2: $recipientAddress2.val().trim(),
             recipient_city: $recipientCity.val().trim(),
-            recipient_state: $recipientState.val().trim(),
+            recipient_state: $recipientState.val(),
             recipient_zip: $recipientZIP.val().trim(),
         };
         console.log(orderData);
-        // Does a post to the register route. If successful, we are redirected to the members page
-        // Otherwise we log any errors
-        function updateOrder() {
-            $.post("/api/order/"+orderId, orderData
-            ).then(function (data) {
-                window.location.href = "/home";
-                // window.location.href = "/home";
-                // If there's an error, handle it by throwing up a bootstrap alert
-            }).catch(handleLoginErr);
-        }
 
-        function handleLoginErr(err) {
-            $("#alert .msg").text(err.responseJSON);
-            $("#alert").fadeIn(500);
+        function updateOrder() {
+            $.ajax({
+                method: "PUT",
+                url: "/api/update/" + orderId,
+                data: orderData
+            })
+                .then(function () {
+                    window.location.href = "/home";
+                });
         }
 
         updateOrder();
