@@ -18,9 +18,8 @@ $(document).ready(function () {
   var recognition = new window.SpeechRecognition();
 
   $font.change(function () {
-    // console.log("You changed!");
     if ($("#fonttype").val() !== "") {
-      $("#message").css({ "font-size": "3em", "font-family": $(this).val() });
+      $("#message").css({ "font-size": "3.5em", "font-family": $(this).val() });
     }
   });
 
@@ -29,11 +28,16 @@ $(document).ready(function () {
       // do an AJAX call to get the image
       url = "https://api.handwrytten.com/v1/cards/view?card_id=" + $(this).val() + "&lowres=1"
       $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
-        imgUrl = `<img src="${handwrytten.card.cover}" style="width: 125px; height:125px; object-fit: cover">`;
+        imgUrl = `<img style="max-height: 240px" class="img-responsive" src="${handwrytten.card.cover}">`;
         $("#card-cover").empty();
         $("#card-cover").append($(imgUrl));
+        if (handwrytten.card.images.inside[0].image) {
+          $("#message").css({
+            "background-image": "url('" + handwrytten.card.images.inside[0].image + "')", 
+            "object-fit": "cover" 
+          });
+        }
       })
-      console.log($(this).val());
     }
   });
 
@@ -49,7 +53,7 @@ $(document).ready(function () {
       font_label: $("#fonttype option:selected").text(),
       sender_name: $senderName.val().trim(),
       recipient_name: $recipientName.val().trim(),
-      recipient_business_name: $recipientBusiness.val().trim(),
+      // recipient_business_name: $recipientBusiness.val().trim(),
       recipient_address1: $recipientAddress1.val().trim(),
       recipient_address2: $recipientAddress2.val().trim(),
       recipient_city: $recipientCity.val().trim(),
@@ -57,14 +61,12 @@ $(document).ready(function () {
       recipient_zip: $recipientZIP.val().trim(),
     };
 
-    console.log(orderData);
     // Does a post to the register route. If successful, we are redirected to the members page
     // Otherwise we log any errors
     function createOrder() {
       $.post("/api/createorder", orderData
       ).then(function (data) {
         window.location.href = "/home";
-        // window.location.href = "/home";
         // If there's an error, handle it by throwing up a bootstrap alert
       }).catch(handleLoginErr);
     };
@@ -75,12 +77,6 @@ $(document).ready(function () {
     };
 
     createOrder();
-    // clear form:
-    // $orderForm.val("");
-    // $senderName.val("");
-    // $recipientName.val("");
-    // $font.val("");
-    // $format.val("");
   });
 
   function Speech() {
