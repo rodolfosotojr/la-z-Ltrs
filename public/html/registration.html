@@ -8,60 +8,59 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  
-  
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="public/styles/styles.css" />
-    <link rel="stylesheet" href="/public/styles/fonts.css" type="text/css" />
+
+
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="public/styles/styles.css" />
+  <link rel="stylesheet" href="/public/styles/fonts.css" type="text/css" />
 
 <body>
   <nav class="navbar navbar-inverse" id="navbar1">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-      </button>
       <a id="logo" href="/"><img src="public/images/Blank Diagram-min.jpeg" alt="logo" class="res"></a>
       <a type="submit" class="btn btn-default" href="/howto">How To</a>
       <a type="submit" class="btn btn-default" href="/newLetter">New Letter</a>
-      <a href="https://www.handwrytten.com/" class="btn btn-default" input type='submit' value='go to handwrytten'>Handwrytten Homepage</a>
+      <a href="https://www.handwrytten.com/" class="btn btn-default" input type='submit'
+        value='go to handwrytten'>Handwrytten Homepage</a>
       <a type="submit" class="btn btn-default" href="/api/logout">logout</a>
     </div>
     </ul>
   </nav>
-    <form id="register">
-      <div class="container">
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
+  <form id="register">
+    <div class="container">
+      <h1>Register</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
 
-        <label for="email"><b>Enter your Email:</b></label>
-        <input type="email" placeholder="Enter username" name="email" id="email-input" required>
+      <label for="email"><b>Enter your Email:</b></label>
+      <input type="email" placeholder="Enter username" name="email" id="email-input" required>
 
-        <label for="firstname"><b>First Name</b></label>
-        <input type="text" placeholder="Enter First Name" name="username" id="firstname-input" required>
+      <label for="firstname"><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" name="username" id="firstname-input" required>
 
-        <label for="username"><b>Last Name</b></label>
-        <input type="text" placeholder="Enter Last Name" name="username" id="lastname-input" required>
+      <label for="username"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" name="username" id="lastname-input" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" id="password-input" required>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="password-input" required>
 
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="psw-repeat" id="confirm-input"required>
-        <hr>
+      <label for="psw-repeat"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="psw-repeat" id="confirm-input" required>
+      <hr>
 
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-        <button id="register-submit" type="submit" class="registerbtn">Register</button>
-      </div>
-
-      <div class="container signin">
-        <p>Already have an account? <a href="/">Sign in</a>.</p>
-      </div>
-    </form>
-    <div>
-      <footer class="container-fluid text-center">
-        <p>..Speak your sentiments</p>
-      </footer>
+      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+      <button id="register-submit" type="submit" class="registerbtn">Register</button>
     </div>
+
+    <div class="container signin">
+      <p>Already have an account? <a href="/">Sign in</a>.</p>
+    </div>
+  </form>
+  <div>
+    <footer class="container-fluid text-center">
+      <p>..Speak your sentiments</p>
+    </footer>
+  </div>
   </div>
 
   <script type="text/javascript" src="public/js/register.js"></script>

@@ -11,10 +11,14 @@
 }
 }
 
-@media (min-width: 100px) and (max-width: 500.98px) { 
-#navbar1{
+@media (min-width: 100px) and (max-width: 668px) { 
+.btn-default{
     min-height:50px;
     background-color: #4c4947;
+    box-align: center !important;
+    padding-left: 25px !important;
+    font-size: 12px !important;
+
 }
 }
 
