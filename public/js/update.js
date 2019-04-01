@@ -40,13 +40,10 @@ $(document).ready(function () {
             $recipientAddress1.val(orderData.recipient_address1);
             $recipientAddress2.val(orderData.recipient_address2);
             $recipientCity.val(orderData.recipient_city);
-            $recipientState.val(orderData.recipient_state);
+            $("#recip-state").val(orderData.recipient_state).change();
             $recipientZIP.val(orderData.recipient_zip);
         }) 
     }
-
-
-
 
     $font.change(function () {
         // console.log("You changed!");

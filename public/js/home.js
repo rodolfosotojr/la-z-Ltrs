@@ -11,14 +11,14 @@ $(document).ready(function () {
         // console.log("***************SAVED ORDER HISTORY:\n", savedorder);
         savedorder.forEach(function (item) {
           // var orderDate = moment(item.createdAt, moment.ISO_8601).format("MMM DD, YYYY hh:mm a");
-          var orderDate = moment.utc(item.updatedAt).local().format("MMM DD, YYYY hh:mm a");
+          var orderDate = moment(item.updatedAt).local().format("MMM DD, YYYY hh:mm a");
           url = "https://api.handwrytten.com/v1/cards/view?card_id=" + item.card_id + "&lowres=1";
           $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
             var buttonColor;
             var buttonStatus;
-            if (item.order_processed === 1) {
-              buttonColor = "btn-light";
-              buttonStatus = "Re-Order";
+            if (item.order_processed === true) {
+              buttonColor = "btn-secondary";
+              buttonStatus = "Order Sent/<br/>Reorder?";
             } else {
               buttonColor = "btn-success";
               buttonStatus = "Submit Order";
@@ -32,9 +32,9 @@ $(document).ready(function () {
               <td><img src="${handwrytten.card.cover}" style="width: 75px; height:75px; object-fit: cover"></td>
               <td style="font-family: ${item.font}; font-size: 3em;">${item.font_label}</td>
               <td>${orderDate}</td>
-              <td><a class="update btn btn-primary" data-id="${item.id}">Edit</a></td>
+              <td><a class="update btn btn-primary" data-id="${item.id}">View/Edit</a></td>
               <td><a class="delete btn btn-danger" data-id="${item.id}">Delete</a></td>
-              <td><a class="complete-order edit btn ${buttonColor}" data-id="${item.id}">${buttonStatus}</a></td>
+              <td><a class="submit-order edit btn ${buttonColor}" data-status="${item.order_processed}" data-id="${item.id}">${buttonStatus}</a></td>
             </tr>
             `
             $("#save-history").append($(row));
@@ -68,13 +68,16 @@ $(document).ready(function () {
       })
   }
 
+  // pull data from MySql
+  savedOrders();
+  // pull data from Handwrytten API
+  getOrders();
+
   // UPDATE order
   $(document).on("click", ".update", function (event) {
     event.preventDefault();
     // get ID from button's data-id then send to /api/order/:id
     var orderId = $(this).attr("data-id");
-    // alert("UPDATE ORDER CALL AT /update?orderid=" + orderId);
-
     // Load page using a query string ?orderid=orderId
     window.location.href = "/update?orderid=" + orderId;
   })
@@ -104,11 +107,33 @@ $(document).ready(function () {
     $('#delete-modal').modal("toggle");
   })
 
-  // pull data from MySql
-  savedOrders();
-  // pull data from Handwrytten API
-  getOrders();
+  // submit order modal - Currently toggles order processed status
+  $(document).on("click", "#submit-order-btn", function (event) {
+    event.preventDefault();
+    var orderId = $(this).attr("data-id");
+    var orderStatus = {"order_processed": $(this).attr("data-status")};
+    // FUTURE TODO - Get userId from order using AJAX call to api/order/:id
+    $.ajax({
+      method: "PUT",
+      url: "/api/submitorder/" + orderId,
+      data: orderStatus
+    })
+      .then(function () {
+        $('#submit-modal').modal("toggle");
+        savedOrders();
+      });
+  })
 
-
+  // show Submit Order Modal and pass data-id to it
+  $(document).on("click", ".submit-order", function (event) {
+    event.preventDefault();
+    var orderId = $(this).attr("data-id");
+    var orderStatus = $(this).attr("data-status");
+    // assign orderId to Modal Confirm button
+    $("#submit-order-btn").attr('data-id', orderId);
+    $("#submit-order-btn").attr('data-status', orderStatus);
+    // show modal
+    $('#submit-modal').modal("toggle");
+  })
 
 });
