@@ -19,15 +19,19 @@ $(document).ready(function () {
     if (url.indexOf("?orderid=") !== -1) {
         orderId = url.split("=")[1];
         getOrder();
-    } else  {
+    } else {
         window.location.href = "/home";
+    }
+    // show character count in message textarea
+    function charCount() {
+        // show character count in message box
+        $("#char-count").text($message.val().length);
     }
 
     // Get the Single Order
     function getOrder() {
         qryURL = "/api/order/" + orderId;
-        $.get(qryURL, function(orderData) {
-            console.log(orderData);
+        $.get(qryURL, function (orderData) {
             // assign all the data to the form
             $message.val(orderData.message);
             $("#format").val(orderData.card_id).change();
@@ -42,11 +46,13 @@ $(document).ready(function () {
             $recipientCity.val(orderData.recipient_city);
             $("#recip-state").val(orderData.recipient_state).change();
             $recipientZIP.val(orderData.recipient_zip);
-        }) 
+
+            // update character count after values have been loaded
+            charCount();
+        })
     }
 
     $font.change(function () {
-        // console.log("You changed!");
         if ($("#fonttype").val() !== "") {
             $("#message").css({ "font-size": "3em", "font-family": $(this).val() });
         }
@@ -57,11 +63,16 @@ $(document).ready(function () {
             // do an AJAX call to get the image
             url = "https://api.handwrytten.com/v1/cards/view?card_id=" + $(this).val() + "&lowres=1"
             $.ajax({ url: url, method: "GET" }).then(function (handwrytten) {
-                imgUrl = `<img src="${handwrytten.card.cover}" style="width: 125px; height:125px; object-fit: cover">`;
+                imgUrl = `<img style="max-height: 240px" class="img-responsive" src="${handwrytten.card.cover}">`;
                 $("#card-cover").empty();
                 $("#card-cover").append($(imgUrl));
+                if (handwrytten.card.images.inside[0].image) {
+                    $("#message").css({
+                        "background-image": "url('" + handwrytten.card.images.inside[0].image + "')",
+                        "object-fit": "cover"
+                    });
+                }
             })
-            console.log($(this).val());
         }
     })
 
@@ -77,14 +88,13 @@ $(document).ready(function () {
             font_label: $("#fonttype option:selected").text(),
             sender_name: $senderName.val().trim(),
             recipient_name: $recipientName.val().trim(),
-            recipient_business_name: $recipientBusiness.val().trim(),
+            // recipient_business_name: $recipientBusiness.val().trim(),
             recipient_address1: $recipientAddress1.val().trim(),
             recipient_address2: $recipientAddress2.val().trim(),
             recipient_city: $recipientCity.val().trim(),
             recipient_state: $recipientState.val(),
             recipient_zip: $recipientZIP.val().trim(),
         };
-        console.log(orderData);
 
         function updateOrder() {
             $.ajax({
@@ -120,8 +130,15 @@ $(document).ready(function () {
                 }
             }
             document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
+            charCount();
         }
         recognition.start();
     })
+
+
+    // character counter
+    $message.change(charCount);
+    $message.keyup(charCount);
+    charCount();
 
 });

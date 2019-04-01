@@ -1,6 +1,16 @@
 // jQuery Login code
 $(document).ready(function () {
 
+  // get user info
+  function getUserInfo() {
+    $.get("/api/getuser").then(function(userdata) {
+      console.log(userdata);
+      $("#firstname").html(userdata.firstname);
+    })
+  }
+
+  getUserInfo();
+
   // USER SAVED ORDERS
   function savedOrders() {
     // clear order row
@@ -8,7 +18,6 @@ $(document).ready(function () {
     // show past orders
     $.ajax({ url: "/api/savedorders", method: "GET" })
       .then(function (savedorder) {
-        // console.log("***************SAVED ORDER HISTORY:\n", savedorder);
         savedorder.forEach(function (item) {
           // var orderDate = moment(item.createdAt, moment.ISO_8601).format("MMM DD, YYYY hh:mm a");
           var orderDate = moment(item.updatedAt).local().format("MMM DD, YYYY hh:mm a");
@@ -49,7 +58,6 @@ $(document).ready(function () {
     // show past orders
     $.ajax({ url: "/api/orderhistory", method: "GET" })
       .then(function (order) {
-        console.log("***************ORDER HISTORY:\n", order.orders);
         order.orders.forEach(function (item) {
           var orderDate = moment.unix(item.date_created).format("MMM DD, YYYY hh:mm a");
           row = `
