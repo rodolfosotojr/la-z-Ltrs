@@ -36,13 +36,13 @@
             <div class="row">
                 <div class="form-group col-md-12">
                     <!-- <label for="sendAd">Sender Name</label> -->
-                    <input type="text" id="sender-name" name="sender-name" placeholder="Sender Name">
+                    <input type="text" id="sender-name" name="sender-name" placeholder="Sender Name" required>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
                     <!-- <label for="card-format">Font Name</label> -->
-                    <select id="fonttype">
+                    <select id="fonttype" required>
                         <option value="" class="">Choose a Handwryting Style</option>
                         <option value="hwJeff" label="Proper Jeff">Proper Jeff</option>
                         <option value="hwLulu" label="Compact Lulu">Compact Lulu</option>
@@ -65,7 +65,7 @@
 
                 <div class="form-group col-md-4">
                     <!-- <label for="font">Card Format</label> -->
-                    <select id="format">
+                    <select id="format" required>
                         <option value="" class="">Choose a Card Style</option>
                         <option value="36">Birthday Wishes</option>
                         <option value="33">Shoot! I Missed Your Birthday!</option>
@@ -93,13 +93,13 @@
                 </div>
                 <div class="form-group col-md-10">
                     <textarea id="message" name="message" placeholder="Write something.."
-                        style="height:200px"></textarea>
+                        style="height:200px" required></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-12">
                     <!-- <label for="recipAd">Recipient Name</label> -->
-                    <input type="text" id="recip-name" name="recip-name" placeholder="Recipient Name">
+                    <input type="text" id="recip-name" name="recip-name" placeholder="Recipient Name" required>
                 </div>
             </div>
             <div class="row">
@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="form-group col-md-12">
                     <!-- <label for="recipAd">Recipient Address 1</label> -->
-                    <input type="text" id="recip-add1" name="recip-add1" placeholder="Recipient Address 1">
+                    <input type="text" id="recip-add1" name="recip-add1" placeholder="Recipient Address 1" required>
                 </div>
             </div>
             <div class="row">
@@ -123,12 +123,13 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <!-- <label for="recipAd">Recipient City</label> -->
-                    <input type="text" id="recip-city" name="recip-city" placeholder="Recipient City">
+                    <input type="text" id="recip-city" name="recip-city" placeholder="Recipient City" required>
                 </div>
                 <div class="form-group col-md-3">
                     <!-- <label for="recipAd">Recipient State</label> -->
                     <!-- <input type="text" id="recip-state" name="recip-state"> -->
-                    <select id="recip-state">
+                    <select id="recip-state" required>
+                        <option value="">Select State</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -185,7 +186,7 @@
 
                 <div class="form-group col-md-3">
                     <!-- <label for="recipAd">Recipient ZIP</label> -->
-                    <input type="text" id="recip-zip" name="recip-zip" placeholder="Recipient ZIP">
+                    <input type="text" id="recip-zip" name="recip-zip" placeholder="Recipient ZIP" required>
                 </div>
             </div>
 

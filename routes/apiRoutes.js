@@ -9,12 +9,7 @@ module.exports = function (app) {
   // Register
   app.post("/api/register", function (req, res) {
     console.log(req.body);
-    db.User.create({
-      email: req.body.email,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      password: req.body.password
-    }).then(function () {
+    db.User.create(req.body).then(function () {
       res.redirect(307, "/api/login");
     }).catch(function (err) {
       console.log(err);
@@ -37,11 +32,8 @@ module.exports = function (app) {
   // ***MySQL*** list past orders
   app.get("/api/savedorders", isAuth, function (req, res) {
     db.Order.findAll({
-      where: { userId: req.user.id },
-      order: [
-        ['updatedAt', 'DESC'],
-    ],
-      // include: [db.User]
+      // where: { userId: req.user.id }, order: [["id", "DESC"]]  }).then(function (results) {
+      where: { userId: req.user.id }
     }).then(function (results) {
       return res.json(results);
     })
@@ -89,14 +81,7 @@ module.exports = function (app) {
       res.json(err);
     });
 
-    // TEST ORDER DO NOT RUN!
-    // var url = "https://api.handwrytten.com/v1/orders/singleStepOrder";
-    // POST Single Order to HandWrytten API
-    // request.post({
-    //   url: url,
-    //   form: put_order_object_here
-    // }, function (error, response, body) {
-    // });
+    // FUTURE TODO - Send a single order to Handwrytten
 
   })
 
@@ -112,40 +97,54 @@ module.exports = function (app) {
         return console.error('Past orders call failed:', err);
       }
       var info = JSON.parse(body)
-      console.log('statusCode:', res && res.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); // Print the HTML for the Google homepage.
-      console.log("httpResponse: ", res);
-      console.log("body: ", body);
       response.json(info);
     })
   })
 
   // PUT route for updating posts
-  app.put("/api/update/:id", function(req, res) {
+  app.put("/api/update/:id", function (req, res) {
     db.Order.update(
       req.body,
       {
         where: {
           id: req.params.id
         }
-      }).then(function(dbPost) {
-      res.json(dbPost);
-    });
+      }).then(function (dbPost) {
+        res.json(dbPost);
+      });
   });
+
+  // PUT route for updating Order Status
+  app.put("/api/submitorder/:id", function (req, res) {
+    console.log("------------CHANGE ORDER STATUS--------------\n", req.body);
+    if (req.body.order_processed === "false") {
+      req.body.order_processed = true
+    }
+    // else {
+    //   req.body.order_processed = false
+    // }
+    db.Order.update(
+      req.body,
+      {
+        where: {
+          id: req.params.id
+        }
+      }).then(function (dbPost) {
+        res.json(dbPost);
+      });
+  });
+
   // Delete an example by id
   app.delete("/api/order/:id", isAuth, function (req, res) {
     var orderId = req.params.id;
     var userId = req.user.id;
     console.log(`----=====DELETE=====----\nCurrent User ID: ${userId}, Order userId: ${orderId}`);
-    
-    // FUTURE TODO- first check if current user id matches userId of the order
-    // if (req.user.id === orderId) {
-      db.Order.destroy({
-         where: { id: orderId } 
-        }).then(function (dbOrder) {
-        res.json(dbOrder);
-      });
 
-    // }
+    // FUTURE TODO- first check if current user id matches userId of the order
+    db.Order.destroy({
+      where: { id: orderId }
+    }).then(function (dbOrder) {
+      res.json(dbOrder);
+    });
   });
 };
