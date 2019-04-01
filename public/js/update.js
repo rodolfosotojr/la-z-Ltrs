@@ -22,6 +22,11 @@ $(document).ready(function () {
     } else {
         window.location.href = "/home";
     }
+    // show character count in message textarea
+    function charCount() {
+        // show character count in message box
+        $("#char-count").text($message.val().length);
+    }
 
     // Get the Single Order
     function getOrder() {
@@ -41,6 +46,9 @@ $(document).ready(function () {
             $recipientCity.val(orderData.recipient_city);
             $("#recip-state").val(orderData.recipient_state).change();
             $recipientZIP.val(orderData.recipient_zip);
+
+            // update character count after values have been loaded
+            charCount();
         })
     }
 
@@ -122,8 +130,15 @@ $(document).ready(function () {
                 }
             }
             document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
+            charCount();
         }
         recognition.start();
     })
+
+
+    // character counter
+    $message.change(charCount);
+    $message.keyup(charCount);
+    charCount();
 
 });

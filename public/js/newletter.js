@@ -94,6 +94,7 @@ $(document).ready(function () {
         }
       }
       document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
+      charCount();
     }
   };
 
@@ -109,5 +110,15 @@ $(document).ready(function () {
       recognition.stop();
     }
   });
+
+  // show character count in message textarea
+  function charCount() {
+    // show character count in message box
+    $("#char-count").text($message.val().length);
+  }
+  // character counter
+  $message.change(charCount);
+  $message.keyup(charCount);
+  charCount();
 
 });
