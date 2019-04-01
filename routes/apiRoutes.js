@@ -35,8 +35,13 @@ module.exports = function (app) {
       // where: { userId: req.user.id }, order: [["id", "DESC"]]  }).then(function (results) {
       where: { userId: req.user.id }
     }).then(function (results) {
+      // get firstname
       return res.json(results);
     })
+  })
+
+  app.get("/api/getuser", isAuth, function (req, res) {
+    return res.json(req.user);
   })
 
   // ***Handwrytten*** list past orders

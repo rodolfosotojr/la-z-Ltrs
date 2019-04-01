@@ -1,6 +1,16 @@
 // jQuery Login code
 $(document).ready(function () {
 
+  // get user info
+  function getUserInfo() {
+    $.get("/api/getuser").then(function(userdata) {
+      console.log(userdata);
+      $("#firstname").html(userdata.firstname);
+    })
+  }
+
+  getUserInfo();
+
   // USER SAVED ORDERS
   function savedOrders() {
     // clear order row

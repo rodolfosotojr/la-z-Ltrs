@@ -17,6 +17,16 @@ $(document).ready(function () {
   var finalTranscript = '';
   var recognition = new window.SpeechRecognition();
 
+  // put current user name in Sender name field
+  function getUserInfo() {
+    $.get("/api/getuser").then(function (userdata) {
+      console.log(userdata);
+      $senderName.val(userdata.firstname);
+    })
+  }
+
+  getUserInfo();
+
   $font.change(function () {
     if ($("#fonttype").val() !== "") {
       $("#message").css({ "font-size": "3.5em", "font-family": $(this).val() });
@@ -33,8 +43,8 @@ $(document).ready(function () {
         $("#card-cover").append($(imgUrl));
         if (handwrytten.card.images.inside[0].image) {
           $("#message").css({
-            "background-image": "url('" + handwrytten.card.images.inside[0].image + "')", 
-            "object-fit": "cover" 
+            "background-image": "url('" + handwrytten.card.images.inside[0].image + "')",
+            "object-fit": "cover"
           });
         }
       })
