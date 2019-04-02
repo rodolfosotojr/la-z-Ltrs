@@ -3,12 +3,6 @@ var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define('User', {
-        // ID IS ALREADY ADDED IN SEQUELIZE
-        // id: {
-        //     autoIncrement: true,
-        //     primaryKey: true,
-        //     type: DataTypes.INTEGER
-        // },
         firstname: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -57,31 +51,27 @@ module.exports = function (sequelize, DataTypes) {
         zip: {
             type: DataTypes.STRING,
         },
-
-
     }, {
-            // timestamps: false,
             freezeTableName: true,
         });
 
-    // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+    // Bcrypt setup is based from 15 - supplemental folder
+    // https://nu.bootcampcontent.com/NU-Coding-Bootcamp/NWCHI201811FSF3/tree/master/15-sequelize/Supplemental/Sequelize-Passport-Example
     User.prototype.validPassword = function (password) {
+        // BCRYPT is used to compare the password from the form field with the hashed version
         return bcrypt.compareSync(password, this.password);
     };
 
-    // Hooks are automatic methods that run during various phases of the User Model lifecycle
-    // In this case, before a User is created, we will automatically hash their password
+    // before the user is created the password is hashed
     User.hook("beforeCreate", function (user) {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
 
+    // create one-to-many join with Addressbook and Order tables
     User.associate = function (models) {
-        // Associating Author with Posts
-        // When an Author is deleted, also delete any associated Posts
         User.hasMany(models.Addressbook, {
             onDelete: "cascade"
         });
-        // user Has Many Orders
         User.hasMany(models.Order, {
             onDelete: "cascade"
         });
