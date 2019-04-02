@@ -13,9 +13,6 @@ Users can send handwritten letters quickly and cleanly by speaking or typing the
 As Susan Lendroth said:
  *"To write is human, to receive a letter: Devine!"*
 
-## How-To Guide
-
-## Getting Started
 
 ### Technologies/Frameworks used:
 Here are the technologies that you need to install 
@@ -25,7 +22,6 @@ Here are the technologies that you need to install
 * [Handwrytten API](https://www.handwrytten.com/api-documentation/)
 * Node Modules:
     * [Express](https://www.npmjs.com/package/express) Fast, unopinionated, minimalist web framework for node.
-    * [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) A Handlebars view engine for Express.
     * [Express-Session](https://www.npmjs.com/package/express-session) Simple session middleware for Express.
     * [DotEnv](https://www.npmjs.com/package/dotenv) Loads environment variables from .env file.
     * [Passport](https://www.npmjs.com/package/passport) An Express-compatible authentication middleware for Node.js.
