@@ -56,7 +56,6 @@ module.exports = function (sequelize, DataTypes) {
         });
 
     // Bcrypt setup is based from 15 - supplemental folder
-    // https://nu.bootcampcontent.com/NU-Coding-Bootcamp/NWCHI201811FSF3/tree/master/15-sequelize/Supplemental/Sequelize-Passport-Example
     User.prototype.validPassword = function (password) {
         // BCRYPT is used to compare the password from the form field with the hashed version
         return bcrypt.compareSync(password, this.password);

@@ -13,12 +13,12 @@ var db = require("./models");
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-// ****** PASSPORT ******************
+// ****** EXPRESS-SESSION & PASSPORT ******************
 // use sessions to keep track of user's login status
 app.use(session({ secret: "robot author", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-// ****** END PASSPORT **************
+// ****** END EXPRESS-SESSION & PASSPORT **************
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
