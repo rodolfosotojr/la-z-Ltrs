@@ -2,11 +2,13 @@
 ![logo](https://github.com/rodolfosotojr/la-z-Ltrs/blob/master/readme-logo.jpeg?raw=true)      *..Speak your sentiments*
 
 ## What our app does
-A simplistic way of sending personalized, hand-written notes to recipients that are deserving. Users will have the ability to use speech to text software for crafting note content, an option to customize the format of the note and handwriting style to craft notes that will be parsed as JSON objects that can be imported to HandWrytten. HandWrytten will charge the user for the note they are trying to send.
+A simplistic way of sending personalized, hand-written, notes to recipients that are deserving. Users will have the ability to use speech to text software for crafting note content, options to customize format and handwriting styles. Crafted letters will be in a format that handwrytten can ingest. 
+
+[Link to Utility & 'How-To' Presentation](https://docs.google.com/presentation/d/1o_VDDoJ8jWpPQrMAwoa6rGI41QEea-3RvRwEq95IO50/edit#slide=id.g54825dc2e7_0_301).
 
 ## Why our app is useful
 
-Users can send handwritten letters quickly and cleanly by speaking or typing their sentiments. The app enable users to free their hands, keep concentration, reference historical note orders and socialize with other users by viewing their notes while efficiently composing letters. 
+Users can send handwritten letters quickly and cleanly by speaking or typing their sentiments. The app enables users to free their hands, keep concentration, reference historical note orders and socialize with other users by viewing their notes.
 
 As Susan Lendroth said:
  *"To write is human, to receive a letter: Devine!"*
