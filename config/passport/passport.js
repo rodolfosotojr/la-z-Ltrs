@@ -1,49 +1,40 @@
+// This local strategy code is based from 15 - supplemental folder
+// https://nu.bootcampcontent.com/NU-Coding-Bootcamp/NWCHI201811FSF3/tree/master/15-sequelize/Supplemental/Sequelize-Passport-Example
+// Documentation at http://www.passportjs.org/docs/configure/
+
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
+// require sequelized user model
 var db = require("../../models");
 
-// Telling passport we want to use a Local Strategy. In other words, we want login with a username/email and password
-passport.use(new LocalStrategy(
-  // Our user will sign in using an email, rather than a "username"
-  {
-    usernameField: "email"
-  },
-  function(email, password, done) {
-    // When a user tries to sign in this code runs
-    db.User.findOne({
-      where: {
-        email: email
-      }
-    }).then(function(dbUser) {
-      // If there's no user with the given email
+// setup Local Strategy using email and password saved in a database
+passport.use(new LocalStrategy({ usernameField: "email" },
+  function (email, password, done) {
+    db.User.findOne({ where: { email: email } }).then(function (dbUser) {
+      // if email and password are not correct, flash a message (Flash not set up)
       if (!dbUser) {
-        return done(null, false, {
-          message: "Incorrect email."
-        });
+        return done(null, false, { message: "No email exists by that name." });
+      } else if (!dbUser.validPassword(password)) {
+        return done(null, false, { message: "Wrong password." });
       }
-      // If there is a user with the given email, but the password the user gives us is incorrect
-      else if (!dbUser.validPassword(password)) {
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
-      // If none of the above, return the user
+      // If email exists and has matching password, return dbUser
       return done(null, dbUser);
     });
   }
 ));
 
-// In order to help keep authentication state across HTTP requests,
-// Sequelize needs to serialize and deserialize the user
-// Just consider this part boilerplate needed to make it all work
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
+// Session setup - need to review serializeUser & deserializeUser
+// From Doc: Passport will serialize and deserialize user instances to and from the session
+
+// this serialized the whole user object data
+passport.serializeUser(function (user, callback) {
+  callback(null, user);
+});
+// this deserialized the user object from the session
+passport.deserializeUser(function (obj, callback) {
+  callback(null, obj);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
-
-// Exporting our configured passport
+// export so server.js can use it.
 module.exports = passport;
