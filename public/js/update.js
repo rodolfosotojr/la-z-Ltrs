@@ -13,6 +13,11 @@ $(document).ready(function () {
     var $recipientState = $("input#recip-state");
     var $recipientZIP = $("input#recip-zip");
     var orderId;
+    var init = false;
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    var finalTranscript = '';
+    var recognition = new window.SpeechRecognition();
+
     // get ID from query string
     var url = window.location.search;
     // extract the orderId number using indexOf
@@ -111,18 +116,38 @@ $(document).ready(function () {
 
     });
 
-    $("#speech").on("click", function (e) {
-        e.preventDefault();
-        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-        let finalTranscript = '';
-        let recognition = new window.SpeechRecognition();
+    // $("#speech").on("click", function (e) {
+    //     e.preventDefault();
+    //     window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    //     let finalTranscript = '';
+    //     let recognition = new window.SpeechRecognition();
+    //     recognition.interimResults = true;
+    //     recognition.maxAlternatives = 10;
+    //     recognition.continuous = true;
+    //     recognition.onresult = (event) => {
+    //         let interimTranscript = '';
+    //         for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+    //             let transcript = event.results[i][0].transcript;
+    //             if (event.results[i].isFinal) {
+    //                 finalTranscript += transcript;
+    //             } else {
+    //                 interimTranscript += transcript;
+    //             }
+    //         }
+    //         document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
+    //         charCount();
+    //     }
+    //     recognition.start();
+    // });
+
+    function Speech() {
         recognition.interimResults = true;
         recognition.maxAlternatives = 10;
         recognition.continuous = true;
-        recognition.onresult = (event) => {
-            let interimTranscript = '';
-            for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
-                let transcript = event.results[i][0].transcript;
+        recognition.onresult = function (event) {
+            var interimTranscript = '';
+            for (var i = event.resultIndex, len = event.results.length; i < len; i++) {
+                var transcript = event.results[i][0].transcript;
                 if (event.results[i].isFinal) {
                     finalTranscript += transcript;
                 } else {
@@ -132,9 +157,20 @@ $(document).ready(function () {
             document.querySelector("#message").innerHTML = finalTranscript + interimTranscript;
             charCount();
         }
-        recognition.start();
-    })
+    };
 
+    $("#speech").on("click", function (e) {
+        e.preventDefault();
+        init = !init;
+
+        if (init) {
+            Speech();
+            recognition.start();
+        } else {
+            Speech();
+            recognition.stop();
+        }
+    });
 
     // character counter
     $message.change(charCount);
